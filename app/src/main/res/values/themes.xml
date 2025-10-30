@@ -1,0 +1,5 @@
+<resources>
+    <style name="Theme.Tunnexa" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/app_background</item>
+    </style>
+</resources>
