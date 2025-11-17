@@ -57,6 +57,14 @@ dependencies {
     implementation(libs.lottie.compose)
     implementation(libs.androidx.compose.ui.geometry)
     implementation(libs.androidx.ui.graphics)
+    
+    // Networking
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging)
+    implementation(libs.gson)
+    
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
