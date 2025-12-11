@@ -159,7 +159,9 @@ class ApiManager private constructor(context: Context) {
             val response = apiService.getServers(request)
             
             if (response.isSuccessful && response.body() != null) {
-                ApiResult.Success(response.body()!!)
+                val wrapperResponse = response.body()!!
+                // Extract inner data from wrapper
+                ApiResult.Success(wrapperResponse.data)
             } else {
                 val errorMessage = response.errorBody()?.string() 
                     ?: "Failed to get servers"

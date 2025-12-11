@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
  */
 data class VpnServer(
     @SerializedName("priority")
-    val priority: Int,
+    val priority: Int?,
     
     @SerializedName("config_id")
     val configId: String,
@@ -16,10 +16,10 @@ data class VpnServer(
     val name: String,
     
     @SerializedName("lat")
-    val latitude: String,
+    val latitude: String?,
     
     @SerializedName("long")
-    val longitude: String,
+    val longitude: String?,
     
     @SerializedName("speed_score")
     val speedScore: Int,

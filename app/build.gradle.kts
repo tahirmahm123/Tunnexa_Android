@@ -17,6 +17,9 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        missingDimensionStrategy("implementation", "skeleton")
+        missingDimensionStrategy("ovpnimpl", "ovpn23")
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -72,7 +75,10 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
-    
+
+    implementation(project(":openvpn"))
+    implementation(project(":wireguard"))
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

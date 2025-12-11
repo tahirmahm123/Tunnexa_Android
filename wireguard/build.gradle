@@ -1,0 +1,82 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
+    id 'signing'
+}
+
+def pkg = 'com.wireguard.android'
+
+android {
+    compileSdk 36
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    namespace "${pkg}.tunnel"
+
+    defaultConfig {
+        minSdk 24
+        targetSdk 36
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "tools/CMakeLists.txt"
+        }
+    }
+
+    testOptions {
+        unitTests.all {
+            testLogging {
+                events "passed", "skipped", "failed"
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            externalNativeBuild {
+                cmake {
+                    arguments "-DANDROID_PACKAGE_NAME=${pkg}.debug"
+                }
+            }
+        }
+        release {
+            externalNativeBuild {
+                cmake {
+                    arguments "-DANDROID_PACKAGE_NAME=${pkg}"
+                }
+            }
+        }
+        all {
+            externalNativeBuild {
+                cmake {
+                    targets "libwg-go.so", "libwg.so", "libwg-quick.so"
+                    arguments "-DGRADLE_USER_HOME=${gradle.gradleUserHomeDir}",
+                            "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
+                }
+            }
+        }
+    }
+
+    lint {
+        disable 'LongLogTag', 'NewApi'
+    }
+
+    publishing {
+        singleVariant('release') {
+            withJavadocJar()
+            withSourcesJar()
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.annotation:annotation:1.9.1'
+    implementation 'androidx.collection:collection:1.2.0'
+    compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
+    testImplementation 'junit:junit:4.13.2'
+}

@@ -8,6 +8,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.compose.ui.res.painterResource
+import com.tunnexa.android.navigation.Screen
 import com.tunnexa.android.ui.components.NavigationBar
 import com.tunnexa.android.ui.components.NavigationBarType
 import com.tunnexa.android.ui.theme.appGradientBrush
@@ -48,13 +50,13 @@ fun SettingsScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(32.dp))
             
             // Settings Content Card
-            SettingsContentCard()
+            SettingsContentCard(navController = navController)
         }
     }
 }
 
 @Composable
-private fun SettingsContentCard() {
+private fun SettingsContentCard(navController: NavController) {
     var darkMode by remember { mutableStateOf(true) }
     var killSwitch by remember { mutableStateOf(false) }
     var autoConnect by remember { mutableStateOf(true) }
@@ -109,7 +111,11 @@ private fun SettingsContentCard() {
                 GradientToggle(isOn = darkMode) { darkMode = !darkMode }
             }
 
-            Divider(modifier = Modifier.padding(vertical = 20.dp), color = Color(0x26FFFFFF))
+            HorizontalDivider(
+                modifier = Modifier.padding(vertical = 20.dp),
+                thickness = DividerDefaults.Thickness,
+                color = Color(0x26FFFFFF)
+            )
 
             // Kill Switch
             Row(
@@ -134,7 +140,11 @@ private fun SettingsContentCard() {
                 GradientToggle(isOn = killSwitch) { killSwitch = !killSwitch }
             }
 
-            Divider(modifier = Modifier.padding(vertical = 20.dp), color = Color(0x26FFFFFF))
+            HorizontalDivider(
+                modifier = Modifier.padding(vertical = 20.dp),
+                thickness = DividerDefaults.Thickness,
+                color = Color(0x26FFFFFF)
+            )
 
             // Auto Connect
             Row(
@@ -159,11 +169,17 @@ private fun SettingsContentCard() {
                 GradientToggle(isOn = autoConnect) { autoConnect = !autoConnect }
             }
 
-            Divider(modifier = Modifier.padding(vertical = 20.dp), color = Color(0x26FFFFFF))
+            HorizontalDivider(
+                modifier = Modifier.padding(vertical = 20.dp),
+                thickness = DividerDefaults.Thickness,
+                color = Color(0x26FFFFFF)
+            )
 
-            // Split Tunnelling
+            // Split Tunnelling - single entry that navigates to SplitTunnelingScreen
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { navController.navigate(Screen.SplitTunneling.route) },
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
@@ -176,26 +192,16 @@ private fun SettingsContentCard() {
                     )
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        text = "This option block internet without active VPN",
+                        text = "Allows apps bypass the vpn",
                         style = MaterialTheme.typography.bodySmall,
                         color = AppColors.SubtitleColor
                     )
                 }
-                Box(
-                    modifier = Modifier
-                        .size(48.dp)
-                        .clip(RoundedCornerShape(14.dp))
-                        .background(Color(0x33FFFFFF))
-                        .clickable { /* navigate to split tunnelling */ },
-                    contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.chevron_right),
-                        contentDescription = "Details",
-                        modifier = Modifier
-                            .size(48.dp)
-                    )
-                }
+                Image(
+                    painter = painterResource(id = R.drawable.chevron_right),
+                    contentDescription = "Navigate",
+                    modifier = Modifier.size(20.dp)
+                )
             }
         }
     }

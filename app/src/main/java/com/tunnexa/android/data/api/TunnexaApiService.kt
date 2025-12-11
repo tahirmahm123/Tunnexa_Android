@@ -5,7 +5,7 @@ import com.tunnexa.android.data.models.request.DeviceVerifyTokenRequest
 import com.tunnexa.android.data.models.request.GetServersRequest
 import com.tunnexa.android.data.models.response.DeviceRegisterResponse
 import com.tunnexa.android.data.models.response.DeviceVerifyTokenResponse
-import com.tunnexa.android.data.models.response.GetServersResponse
+import com.tunnexa.android.data.models.response.GetServersWrapperResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -41,11 +41,11 @@ interface TunnexaApiService {
      * Get VPN servers for a client device
      * 
      * @param request Request containing device_id and token
-     * @return Response containing list of VPN servers
+     * @return Response containing list of VPN servers wrapped in GetServersWrapperResponse
      */
     @POST("api/client/servers")
     suspend fun getServers(
         @Body request: GetServersRequest
-    ): Response<GetServersResponse>
+    ): Response<GetServersWrapperResponse>
 }
 

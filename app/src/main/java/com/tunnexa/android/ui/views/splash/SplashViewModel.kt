@@ -4,11 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tunnexa.android.data.api.ApiManager
 import com.tunnexa.android.data.api.ApiResult
+import com.tunnexa.android.data.repository.ServerRepository
+import com.tunnexa.android.data.repository.ServerResult
 import com.tunnexa.android.data.storage.SecurePreferencesManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,12 +26,13 @@ sealed class SplashUiState {
 
 /**
  * ViewModel for Splash Screen
- * Handles device registration and token verification
+ * Handles device registration, token verification, and server loading
  */
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val apiManager: ApiManager,
-    private val securePreferencesManager: SecurePreferencesManager
+    private val securePreferencesManager: SecurePreferencesManager,
+    private val serverRepository: ServerRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<SplashUiState>(SplashUiState.Loading)
@@ -67,12 +71,12 @@ class SplashViewModel @Inject constructor(
             is ApiResult.Success -> {
                 val response = result.data
                 // Check if success is false or valid is not true
-                if (response.success == false || response.valid != true) {
+                if (!response.success || response.valid != true) {
                     // Token is invalid or verification failed, register device again
                     registerDevice()
                 } else {
-                    // Token is valid, navigate to home
-                    _uiState.value = SplashUiState.NavigateToHome
+                    // Token is valid, load servers then navigate
+                    loadServers()
                 }
             }
             is ApiResult.Error -> {
@@ -95,7 +99,8 @@ class SplashViewModel @Inject constructor(
         when (val result = apiManager.registerDevice()) {
             is ApiResult.Success -> {
                 // Device registered successfully, token is stored automatically
-                _uiState.value = SplashUiState.NavigateToHome
+                // Load servers then navigate
+                loadServers()
             }
             is ApiResult.Error -> {
                 _uiState.value = SplashUiState.Error(
@@ -107,6 +112,56 @@ class SplashViewModel @Inject constructor(
                     "Network error. Please check your internet connection."
                 )
             }
+        }
+    }
+    
+    /**
+     * Load servers and navigate to home
+     * Uses cache-first strategy: loads cached data instantly, then fetches fresh data in background
+     */
+    private suspend fun loadServers() {
+        try {
+            // Get first result (cached data if available, or API result if no cache)
+            val firstResult = serverRepository.getServers().first()
+            
+            when (firstResult) {
+                is ServerResult.Success -> {
+                    // Servers loaded (from cache or API), navigate to home immediately
+                    _uiState.value = SplashUiState.NavigateToHome
+                    
+                    // Continue collecting in background to update cache with fresh data
+                    // This ensures cache is updated for next app open
+                    viewModelScope.launch {
+                        serverRepository.getServers().collect {
+                            // Just consume the flow to ensure background fetch completes
+                            // Cache will be updated automatically
+                        }
+                    }
+                }
+                is ServerResult.Error -> {
+                    // If we have cached data, still navigate (error is non-critical)
+                    if (firstResult.hasCachedData) {
+                        _uiState.value = SplashUiState.NavigateToHome
+                    } else {
+                        _uiState.value = SplashUiState.Error(
+                            firstResult.message
+                        )
+                    }
+                }
+                is ServerResult.NetworkError -> {
+                    // If we have cached data, still navigate (network error is non-critical)
+                    if (firstResult.hasCachedData) {
+                        _uiState.value = SplashUiState.NavigateToHome
+                    } else {
+                        _uiState.value = SplashUiState.Error(
+                            "Network error. Please check your internet connection."
+                        )
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            // If exception occurs, navigate anyway - cache might exist
+            _uiState.value = SplashUiState.NavigateToHome
         }
     }
 }

@@ -3,7 +3,27 @@ package com.tunnexa.android.data.models.response
 import com.google.gson.annotations.SerializedName
 
 /**
- * Response model for getting VPN servers
+ * Wrapper response model for getting VPN servers (outer structure)
+ */
+data class GetServersWrapperResponse(
+    @SerializedName("status")
+    val status: Boolean,
+    
+    @SerializedName("message")
+    val message: String,
+    
+    @SerializedName("code")
+    val code: Int,
+    
+    @SerializedName("data")
+    val data: GetServersResponse,
+    
+    @SerializedName("errors")
+    val errors: ApiError
+)
+
+/**
+ * Response model for getting VPN servers (inner data structure)
  */
 data class GetServersResponse(
     @SerializedName("success")

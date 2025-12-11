@@ -31,11 +31,14 @@ import com.tunnexa.android.ui.theme.DesignTokens
 import com.tunnexa.android.ui.theme.StatusConnected
 import com.tunnexa.android.ui.theme.TextBlueGray
 import com.tunnexa.android.ui.components.SignalBars
+import com.tunnexa.android.utils.FlagMap
+
 @Composable
 fun ServerSelectionCard(
     countryName: String = "United State",
     city: String = "New York City",
     signalStrength: Int = 5,
+    countryCode: String? = null,
     onClick: () -> Unit = {}
 ) {
     // Transparent diagonal background gradient
@@ -105,8 +108,14 @@ fun ServerSelectionCard(
                 ) {
                     // Flag
                     Image(
-                        painter = painterResource(id = R.drawable.flag_us),
-                        contentDescription = "US Flag",
+                        painter = painterResource(
+                            id = if (countryCode != null) {
+                                FlagMap.flags[countryCode] ?: R.drawable.flag_us
+                            } else {
+                                R.drawable.flag_us
+                            }
+                        ),
+                        contentDescription = "${countryName} Flag",
                         modifier = Modifier
                             .size(41.dp)
                             .clip(CircleShape)

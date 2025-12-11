@@ -6,7 +6,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.tunnexa.android.ui.views.home.HomeScreen
 import com.tunnexa.android.ui.views.serverlist.ServerListScreen
+import com.tunnexa.android.ui.views.settings.SelectAppsScreen
 import com.tunnexa.android.ui.views.settings.SettingsScreen
+import com.tunnexa.android.ui.views.settings.SplitTunnelingScreen
 import com.tunnexa.android.ui.views.splash.SplashScreen
 
 sealed class Screen(val route: String) {
@@ -17,6 +19,8 @@ sealed class Screen(val route: String) {
     object Share : Screen("share")
     object Settings : Screen("settings")
     object ServerList : Screen("server_list")
+    object SelectApps : Screen("select_apps")
+    object SplitTunneling : Screen("split_tunneling")
 }
 
 @Composable
@@ -48,6 +52,14 @@ fun AppNavGraph(
         
         composable(Screen.ServerList.route) {
             ServerListScreen(navController = navController)
+        }
+        
+        composable(Screen.SelectApps.route) {
+            SelectAppsScreen(navController = navController)
+        }
+        
+        composable(Screen.SplitTunneling.route) {
+            SplitTunnelingScreen(navController = navController)
         }
     }
 }
