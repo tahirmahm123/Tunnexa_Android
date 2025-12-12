@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.google.services)
     kotlin("kapt")
     id("checkstyle")
 }
@@ -207,6 +208,25 @@ dependencies {
     implementation(libs.androidx.annotation)
     compileOnly("com.google.code.findbugs:jsr305:3.0.2")
     implementation("androidx.collection:collection:1.2.0")
+    
+    // Firebase - Import the Firebase BoM to ensure version compatibility
+    implementation(platform(libs.firebase.bom))
+    
+    // Firebase dependencies (versions managed by BoM)
+    // 1. Performance Monitor
+    implementation(libs.firebase.perf)
+    
+    // 2. Analytics (Real Time, Events, Audiences, Latest Release etc.)
+    implementation(libs.firebase.analytics.ktx)
+    
+    // 3. Release Monitor (App Distribution)
+    implementation(libs.firebase.appdistribution.api.ktx)
+    
+    // 4. Messaging (FCM)
+    implementation(libs.firebase.messaging.ktx)
+    
+    // 5. Crashlytics
+    implementation(libs.firebase.crashlytics.ktx)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
