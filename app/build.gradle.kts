@@ -45,7 +45,7 @@ android {
 
     externalNativeBuild {
         cmake {
-            path = file("src/main/CMakeLists.txt")
+            path = file("src/main/cpp/CMakeLists.txt")
         }
     }
 
@@ -159,11 +159,11 @@ fun registerGenTask(variantName: String, variantDirName: String): File {
             mkdir(genDir)
         }
         commandLine(listOf(swigcmd, "-outdir", genDir, "-outcurrentdir", "-c++", "-java", "-package", "net.openvpn.ovpn3",
-                "-Isrc/main/openvpn/cpp/openvpn3/client", "-Isrc/main/openvpn/cpp/openvpn3/",
+                "-Isrc/main/cpp/openvpn/openvpn3/client", "-Isrc/main/cpp/openvpn/openvpn3/",
                 "-DOPENVPN_PLATFORM_ANDROID",
                 "-o", "${genDir}/ovpncli_wrap.cxx", "-oh", "${genDir}/ovpncli_wrap.h",
-                "src/main/openvpn/cpp/openvpn3/client/ovpncli.i"))
-        inputs.files("src/main/openvpn/cpp/openvpn3/client/ovpncli.i")
+                "src/main/cpp/openvpn/openvpn3/client/ovpncli.i"))
+        inputs.files("src/main/cpp/openvpn/openvpn3/client/ovpncli.i")
         outputs.dir(genDir)
     }
     return baseDir

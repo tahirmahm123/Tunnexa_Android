@@ -1,36 +1,36 @@
-[submodule "app/src/main/openvpn/cpp/openvpn"]
-	path = app/src/main/openvpn/cpp/openvpn
+[submodule "app/src/main/cpp/openvpn/openvpn"]
+	path = app/src/main/cpp/openvpn/openvpn
 	url = https://github.com/schwabe/openvpn.git
 
-[submodule "app/src/main/openvpn/cpp/openssl"]
-	path = app/src/main/openvpn/cpp/openssl
+[submodule "app/src/main/cpp/openvpn/openssl"]
+	path = app/src/main/cpp/openvpn/openssl
 	url = https://github.com/schwabe/platform_external_openssl.git
 
-[submodule "app/src/main/openvpn/cpp/mbedtls"]
-	path = app/src/main/openvpn/cpp/mbedtls
+[submodule "app/src/main/cpp/openvpn/mbedtls"]
+	path = app/src/main/cpp/openvpn/mbedtls
 	url = https://github.com/ARMmbed/mbedtls.git
 
-[submodule "app/src/main/openvpn/cpp/openvpn3"]
-	path = app/src/main/openvpn/cpp/openvpn3
+[submodule "app/src/main/cpp/openvpn/openvpn3"]
+	path = app/src/main/cpp/openvpn/openvpn3
 	url = https://github.com/schwabe/openvpn3.git
 
-[submodule "app/src/main/openvpn/cpp/asio"]
-	path = app/src/main/openvpn/cpp/asio
+[submodule "app/src/main/cpp/openvpn/asio"]
+	path = app/src/main/cpp/openvpn/asio
 	url = https://github.com/chriskohlhoff/asio.git
 
-[submodule "app/src/main/openvpn/cpp/lz4"]
-	path = app/src/main/openvpn/cpp/lz4
+[submodule "app/src/main/cpp/openvpn/lz4"]
+	path = app/src/main/cpp/openvpn/lz4
 	url = https://github.com/lz4/lz4.git
 
-[submodule "app/src/main/openvpn/cpp/fmt"]
-	path = app/src/main/openvpn/cpp/fmt
+[submodule "app/src/main/cpp/openvpn/fmt"]
+	path = app/src/main/cpp/openvpn/fmt
 	url = https://github.com/fmtlib/fmt
 
-[submodule "app/src/main/wireguard/tools/wireguard-tools"]
-	path = app/src/main/wireguard/tools/wireguard-tools
+[submodule "app/src/main/cpp/wireguard/wireguard-tools"]
+	path = app/src/main/cpp/wireguard/wireguard-tools
 	url = https://git.zx2c4.com/wireguard-tools
 
-[submodule "app/src/main/wireguard/tools/elf-cleaner"]
-	path = app/src/main/wireguard/tools/elf-cleaner
+[submodule "app/src/main/cpp/wireguard/elf-cleaner"]
+	path = app/src/main/cpp/wireguard/elf-cleaner
 	url = https://github.com/termux/termux-elf-cleaner
 

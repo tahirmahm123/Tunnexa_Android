@@ -16,15 +16,15 @@ local.properties
 build/
 # Old openvpn/wireguard module paths (now merged into app/src/main/)
 # These entries are kept for reference but the folders have been deleted
-app/src/main/openvpn/cpp/openvpn
-app/src/main/openvpn/cpp/openssl
-app/src/main/openvpn/cpp/mbedtls
-app/src/main/openvpn/cpp/openvpn3
-app/src/main/openvpn/cpp/asio
-app/src/main/openvpn/cpp/lz4
-app/src/main/openvpn/cpp/fmt
-app/src/main/wireguard/tools/wireguard-tools
-app/src/main/wireguard/tools/elf-cleaner
+app/src/main/cpp/openvpn/openvpn
+app/src/main/cpp/openvpn/openssl
+app/src/main/cpp/openvpn/mbedtls
+app/src/main/cpp/openvpn/openvpn3
+app/src/main/cpp/openvpn/asio
+app/src/main/cpp/openvpn/lz4
+app/src/main/cpp/openvpn/fmt
+app/src/main/cpp/wireguard/wireguard-tools
+app/src/main/cpp/wireguard/elf-cleaner
 .synopsys
 polaris.yml
 .coverity

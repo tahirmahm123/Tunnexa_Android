@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.4.1)
 project("Tunnexa")
 
 # Include OpenVPN CMakeLists
-add_subdirectory(openvpn/cpp)
+add_subdirectory(openvpn)
 
 # Include WireGuard CMakeLists  
-add_subdirectory(wireguard/tools)
+add_subdirectory(wireguard)
 
