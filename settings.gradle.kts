@@ -21,5 +21,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Tunnexa"
 include(":app")
-include(":openvpn")
-include(":wireguard")

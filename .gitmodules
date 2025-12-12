@@ -1,36 +1,36 @@
-[submodule "openvpn/openvpn"]
-	path = openvpn/src/main/cpp/openvpn
+[submodule "app/src/main/openvpn/cpp/openvpn"]
+	path = app/src/main/openvpn/cpp/openvpn
 	url = https://github.com/schwabe/openvpn.git
 
-[submodule "openvpn/openssl"]
-	path = openvpn/src/main/cpp/openssl
+[submodule "app/src/main/openvpn/cpp/openssl"]
+	path = app/src/main/openvpn/cpp/openssl
 	url = https://github.com/schwabe/platform_external_openssl.git
 
-[submodule "openvpn/src/main/cpp/mbedtls"]
-	path = openvpn/src/main/cpp/mbedtls
+[submodule "app/src/main/openvpn/cpp/mbedtls"]
+	path = app/src/main/openvpn/cpp/mbedtls
 	url = https://github.com/ARMmbed/mbedtls.git
 
-[submodule "openvpn/src/main/cpp/openvpn3"]
-	path = openvpn/src/main/cpp/openvpn3
+[submodule "app/src/main/openvpn/cpp/openvpn3"]
+	path = app/src/main/openvpn/cpp/openvpn3
 	url = https://github.com/schwabe/openvpn3.git
 
-[submodule "openvpn/src/main/cpp/asio"]
-	path = openvpn/src/main/cpp/asio
+[submodule "app/src/main/openvpn/cpp/asio"]
+	path = app/src/main/openvpn/cpp/asio
 	url = https://github.com/chriskohlhoff/asio.git
 
-[submodule "openvpn/src/main/cpp/lz4"]
-	path = openvpn/src/main/cpp/lz4
+[submodule "app/src/main/openvpn/cpp/lz4"]
+	path = app/src/main/openvpn/cpp/lz4
 	url = https://github.com/lz4/lz4.git
 
-[submodule "openvpn/src/main/cpp/fmt"]
-	path = openvpn/src/main/cpp/fmt
+[submodule "app/src/main/openvpn/cpp/fmt"]
+	path = app/src/main/openvpn/cpp/fmt
 	url = https://github.com/fmtlib/fmt
 
-[submodule "wireguard/tools/wireguard-tools"]
-	path = wireguard/tools/wireguard-tools
+[submodule "app/src/main/wireguard/tools/wireguard-tools"]
+	path = app/src/main/wireguard/tools/wireguard-tools
 	url = https://git.zx2c4.com/wireguard-tools
 
-[submodule "wireguard/tools/elf-cleaner"]
-	path = wireguard/tools/elf-cleaner
+[submodule "app/src/main/wireguard/tools/elf-cleaner"]
+	path = app/src/main/wireguard/tools/elf-cleaner
 	url = https://github.com/termux/termux-elf-cleaner
 
