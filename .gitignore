@@ -14,28 +14,8 @@
 .cxx
 local.properties
 build/
-openvpn/libs/
-openvpn/ovpnlibs/
-openvpn/obj/
-openvpn/.cxx/
-.navigation
-google-breakpad/
-ovpn3/boost
-polarssl
-proguard-project.txt
-build.xml
-cache.properties
-
-# User-specific configurations
-.idea
-
-openvpn/openvpn3
-
-
-openvpn/src/ovpn3/java/net/openvpn/ovpn3
-openvpn/.externalNativeBuild
-openvpn/.cxx
-openvpn/build
+# Old openvpn/wireguard module paths (now merged into app/src/main/)
+# These entries are kept for reference but the folders have been deleted
 app/src/main/openvpn/cpp/openvpn
 app/src/main/openvpn/cpp/openssl
 app/src/main/openvpn/cpp/mbedtls

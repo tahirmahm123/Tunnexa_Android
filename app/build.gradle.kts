@@ -52,9 +52,6 @@ android {
     sourceSets {
         getByName("main") {
             assets.srcDirs("src/main/assets", "build/ovpnassets")
-            java.srcDirs("src/main/java", "src/main/openvpn/java", "src/main/wireguard/java")
-            aidl.srcDirs("src/main/aidl", "src/main/openvpn/aidl")
-            res.srcDirs("src/main/res", "src/main/openvpn/res")
         }
     }
 
